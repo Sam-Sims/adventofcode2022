@@ -22,15 +22,18 @@ def parse_instructions(instructions):
 
 
 def main():
+    step2 = True
     with open("input.txt") as f:
         lines = f.read().splitlines()
     stacks = construct_stacks(lines[0:8])
     instructions = lines[10:]
     instructions = parse_instructions(instructions)
     for count, source, dest in instructions:
-        for i in range(count):
-            stacks[dest - 1].append(stacks[source - 1].pop())
-
+        if step2:
+            crates_to_take = [stacks[source - 1].pop() for _ in range(count)]
+            stacks[dest - 1].extend(reversed(crates_to_take))
+        else:
+            [stacks[dest - 1].append(stacks[source - 1].pop()) for _ in range(count)]
     for stack in stacks:
         print(stack)
 
