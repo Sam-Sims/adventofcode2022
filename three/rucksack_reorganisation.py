@@ -1,4 +1,5 @@
 def get_priority(item):
+    # use ascii encoding to get the priority
     if item.isupper():
         return ord(item) - 38
     elif item.islower():
@@ -33,10 +34,10 @@ def main():
     # chunk the list into chunks of 3 in a list
     chunked_list = [items[i : i + 3] for i in range(0, len(items), 3)]
     for chunk in chunked_list:
-        common = set.intersection(*map(set, chunk))  # set of each string in the chunk
+        common = set.intersection(*map(set, chunk))
         common = str(common)[
-            2
-        ]  # hacky way to get the character in the set - assuming only 1 character will be always be returned
+            2  # hacky way to get the character in the set - assuming only 1 character will be always be returned
+        ]
         chunked_priority_list.append(get_priority(common))
 
     print(sum(priority_list))
