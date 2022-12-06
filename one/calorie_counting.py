@@ -1,11 +1,9 @@
-
-
 def main():
-    with open('input.txt') as f:
-        elfs = f.read().split('\n\n')
+    with open("input.txt") as f:
+        elfs = f.read().split("\n\n")
         total_calories_per_elf = []
         for elf in elfs:
-            calories_per_elf = elf.split('\n')
+            calories_per_elf = elf.split("\n")
 
             # convert each item in list to int
             calories_per_elf = list(map(int, calories_per_elf))
@@ -18,6 +16,7 @@ def main():
     total_calories_per_elf.sort()
     total_top_three = sum(total_calories_per_elf[-3:])
     print(f"The top three elves have a total of {total_top_three} calories")
+
 
 if __name__ == "__main__":
     main()

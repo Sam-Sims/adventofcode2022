@@ -1,17 +1,16 @@
-
 def main():
-    scores_shape = {"X" : 1, "Y" : 2, "Z" : 3}
-    scores_outcome = {"loss" : 0, "tie" : 3, "win" : 6}
+    scores_shape = {"X": 1, "Y": 2, "Z": 3}
+    scores_outcome = {"loss": 0, "tie": 3, "win": 6}
 
     # key = opponent plays, value = List of what you must play to lose (Index 0), tie (index 1) or win (Index 2)
-    win_map = {"A" : ["Z", "X", "Y"], "B" : ["X", "Y", "Z"], "C" : ["Y", "Z", "X"]}
+    win_map = {"A": ["Z", "X", "Y"], "B": ["X", "Y", "Z"], "C": ["Y", "Z", "X"]}
 
-    with open('input.txt') as f:
+    with open("input.txt") as f:
         score = 0
         score2 = 0
         for line in f:
-            game = line.strip().split(' ')
-            
+            game = line.strip().split(" ")
+
             opponent = game[0]
             you = game[1]
             print(f"Opponent plays {opponent}, you play {you}")
@@ -45,10 +44,6 @@ def main():
 
             print(f"Your final score using the 1st strategy is {score}")
             print(f"Your final score using the 2nd strategy is {score2}")
-
-
-
-
 
 
 if __name__ == "__main__":
