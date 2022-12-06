@@ -11,8 +11,13 @@ def main():
             calories_per_elf = list(map(int, calories_per_elf))
             total = sum(calories_per_elf)
             total_calories_per_elf.append(total)
-            
-        print(max(total_calories_per_elf))
+
+    max_calories = max(total_calories_per_elf)
+    print(f"The elf with the highest total calories is {max_calories}")
+
+    total_calories_per_elf.sort()
+    total_top_three = sum(total_calories_per_elf[-3:])
+    print(f"The top three elves have a total of {total_top_three} calories")
 
 if __name__ == "__main__":
     main()
