@@ -40,7 +40,6 @@ def build_filesystem(lines):
 
 
 def calc_dir_size(key, filesystem_structure):
-    """Recursively calculate the size of a directory"""
     total_size = 0
     # loop through each child which can either be a file or a directory
     for child in filesystem_structure[key]:
@@ -61,7 +60,7 @@ def calc_file_sizes(filesystem_structure, limit):
     # loop through each file path in the dictionary
     for dir in filesystem_structure.keys():
         print(dir)
-        #  recursively calculate the size of the directory
+        #  recursively calculate the size of the directory + all sub dirs
         dir_size = calc_dir_size(dir, filesystem_structure)
         # store the size of the directory in a dictionary
         dir_sizes[dir] = dir_size
