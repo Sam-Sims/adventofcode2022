@@ -59,7 +59,6 @@ def calc_file_sizes(filesystem_structure, limit):
     dir_sizes = {}
     # loop through each file path in the dictionary
     for dir in filesystem_structure.keys():
-        print(dir)
         #  recursively calculate the size of the directory + all sub dirs
         dir_size = calc_dir_size(dir, filesystem_structure)
         # store the size of the directory in a dictionary
@@ -68,7 +67,30 @@ def calc_file_sizes(filesystem_structure, limit):
         if dir_size < limit:
             print(f"Directory {dir} is under the limit")
             total_size += dir_size
-    print(total_size)
+    return dir_sizes
+
+
+def find_smallest_dir(dir_sizes, total_disk_space, needed_disk_space):
+    print(dir_sizes)
+    total_space_used = dir_sizes[Path("/")]
+    unused_space = total_disk_space - total_space_used
+    print(f"Space that is unused: {unused_space}")
+    space_to_free = needed_disk_space - unused_space
+    print(f"Space we need to free: {space_to_free}")
+    
+    candidates_to_delete = {}
+    for dir in dir_sizes.keys():
+        if dir_sizes[dir] >= space_to_free:
+            print(
+                f"Directory {dir} is larger than the space to free with size {dir_sizes[dir]}"
+            )
+            candidates_to_delete[dir] = dir_sizes[dir]
+    print(candidates_to_delete)
+    # find the smallest directory
+    smallest_dir = min(candidates_to_delete, key=candidates_to_delete.get)
+    print(
+        f"Smallest directory to delete is {smallest_dir} which would free {dir_sizes[smallest_dir]}"
+    )
 
 
 def main():
@@ -76,7 +98,8 @@ def main():
         lines = f.read().splitlines()
         lines
     fs_structure = build_filesystem(lines)
-    calc_file_sizes(fs_structure, 100000)
+    dir_sizes = calc_file_sizes(fs_structure, 100000)
+    smallest_dir = find_smallest_dir(dir_sizes, 70000000, 30000000)
 
 
 if __name__ == "__main__":
